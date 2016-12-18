@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- START Head -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    <title>Inveus - MIM Backend</title>
+
+    <meta name="robots" content="index, nofollow"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+<!-- END Head -->
+
+
+<body class="sidebar-disabled navbar-disabled footer-disabled ">
+
+<div class="main-wrap">
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default b-a-2 no-bg b-gray-dark">
+                        <div class="panel-heading text-center">
+                            <h2 class="text-center f-w-300 m-b-0">inveus<strong>mim</strong> Backend</h2>
+                        </div>
+                        <div class="panel-body">
+
+
+                            {% if error %}
+                                {% if error.messageKey == 'Account is locked.' %}
+                                    <div class="alert alert-danger">Ihr Benutzerkonto ist momentan gesperrrt!<br>Haben
+                                        Sie Ihr Benutzerkonto schon aktiviert?
+                                    </div>
+                                {% elseif error.messageKey == 'Invalid credentials.' %}
+                                    <div class="alert alert-danger">Email Adresse oder Passwort falsch!</div>
+                                {% else %}
+                                    <div class="alert alert-danger">{{ error.messageKey }}</div>
+                                {% endif %}
+
+                            {% endif %}
+                            {% for flash_message in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success"><p>{{ flash_message }}</p></div>
+                            {% endfor %}
+                            {% for flash_message in app.session.flashbag.get('error') %}
+                                <div class="alert alert-warning"><p>{{ flash_message }}</p></div>
+                            {% endfor %}
+                            <form class="m-t-3" method="post" id="login" action="{{ path('login_check') }}">
+                                <div class="form-group">
+                                    <input class="form-control" name="_username"
+                                           placeholder="Benutzername">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="_password"
+                                           placeholder="Passwort">
+                                </div>
+                                <button type="submit" value="Login" class="btn btn-success" name="login">Login</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <p class="text-gray-light text-center">inveusmim
+                        <small>{{ version }}-{{ server }}</small>
+                        <span class="text-gray-light">&#xA9; {{ "now"|date('Y') }}. Made by <i
+                                    class="fa fa-fw fa-heart text-danger"></i> Hamburg, Germany</span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
