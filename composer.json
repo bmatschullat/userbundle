@@ -12,5 +12,8 @@
             "name": "Bennet Matschullat",
             "email": "bennet@3mweb.de"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": { "Dreimweb\\UserBundle": "" }
+    },
 }
