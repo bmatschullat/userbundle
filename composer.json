@@ -1,0 +1,16 @@
+{
+    "name": "dreimweb/userbundle",
+    "description": "UserBundle",
+    "type": "sf3",
+    "require": {
+        "php": ">=5.5.9",
+        "symfony/symfony": "3.2.*",
+        "doctrine/orm": "^2.5"
+    },
+    "authors": [
+        {
+            "name": "Bennet Matschullat",
+            "email": "bennet@3mweb.de"
+        }
+    ]
+}
